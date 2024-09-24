@@ -36,9 +36,7 @@ const Login: React.FC = () => {
       <>
         <MainMenu />
         <IonPage id="main-content">
-
           <IonContent className="ion-padding">
-            <h1 className='loginTitle'>Paint Kit Login</h1>
             <div className='loginMainContainer'>
               <IonInput
                 type="email"
@@ -68,10 +66,6 @@ const Login: React.FC = () => {
               {error && <p style={{ color: 'red' }}>{error}</p>}
             </div>
           </IonContent>
-          {/* <IonFooter>
-          <IonToolbar>            
-          </IonToolbar>
-        </IonFooter> */}
         </IonPage>
       </>
     );

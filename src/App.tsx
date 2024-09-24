@@ -3,9 +3,6 @@ import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
-import CreateJob from './pages/CreateJob/CreateJob';
-import ViewEditJob from './pages/EditJob/EditJob';
-import ImageSwiper from './pages/ImageSwiper/ImageSwiper';
 import PublicRoute from './context/PublicRoute';
 import PrivateRoute from './context/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
@@ -35,11 +32,11 @@ import '@ionic/react/css/display.css';
 
 /* import '@ionic/react/css/palettes/dark.always.css'; */
 /* import '@ionic/react/css/palettes/dark.class.css'; */
-// import '@ionic/react/css/palettes/dark.system.css';
+import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import PrintJob from './pages/PrintJob/PrintJob';
+import InfiniteScrollCalendar from './pages/InfiniteScrollCalendar/InfiniteScrollCalendar';
 
 setupIonicReact();
 
@@ -50,10 +47,7 @@ const App: React.FC = () => (
         <IonRouterOutlet>
           <PublicRoute exact path="/Login" component={Login} />
           <PrivateRoute exact path="/home" component={Home} />
-          <PrivateRoute exact path="/createJob" component={CreateJob} />
-          <PrivateRoute exact path="/viewJob" component={ViewEditJob} />
-          <PrivateRoute exact path="/imageSwiper" component={ImageSwiper} />
-          <PrivateRoute exact path="/printJob" component={PrintJob} />
+          <PrivateRoute exact path="/cal" component={InfiniteScrollCalendar} />
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>

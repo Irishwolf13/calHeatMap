@@ -1,7 +1,6 @@
 import { IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Home.css';
 import MainMenu from '../../components/MainMenu/MainMenu';
-import DisplayJobs from '../../components/DisplayJobs/DisplayJobs'
 import { useHistory } from 'react-router-dom';
 
 
@@ -21,13 +20,12 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonContent className="ion-padding">
-        <DisplayJobs />
         </IonContent>
-        <IonFooter>
+        {/* <IonFooter>
           <IonToolbar>
-            <IonButton onClick={() => history.push('/createJob')}>Create New Job</IonButton>
+            <IonButton onClick={() => history.push('/cal')}>Calendar</IonButton>
           </IonToolbar>
-        </IonFooter>
+        </IonFooter> */}
       </IonPage>
     </>
   );

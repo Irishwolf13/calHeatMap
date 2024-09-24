@@ -34,7 +34,7 @@ const MainMenu: React.FC = () => {
           {currentUser ? (
             <div className="menuButtonHolder">
               <IonButton onClick={() => history.push('/')}>Home</IonButton>
-              <IonButton onClick={() => history.push('/createJob')}>Create New Job</IonButton>
+              <IonButton onClick={() => history.push('/cal')}>Calendar</IonButton>
               <IonButton className='menuBottomButton' color="danger" onClick={handleLogout}>Logout</IonButton>
             </div>
           ) : (
