@@ -1,0 +1,38 @@
+.loginTitle {
+    color: rgb(255, 255, 255); /* Change text color as needed */
+    font-size: 3em; /* Adjust font size as needed */
+    text-align: center; /* Centers text within its container */
+    text-shadow: 
+    0 0 5px #000000,
+    0 0 10px #000000,
+    0 0 10px #000000,
+    0 0 10px #000000,
+    0 0 15px #ffee00,
+    0 0 15px #ffee00,
+    0 0 15px #ffee00,
+    0 0 30px #0004ff,
+    0 0 30px #0004ff,
+    0 0 30px #0004ff,
+    0 0 30px #0004ff,
+    0 0 30px #002fff,
+    0 0 40px #002fff,
+    0 0 40px #002fff,
+    0 0 50px #b700ff,
+    0 0 50px #b700ff,
+    0 0 50px #b700ff,
+    0 0 50px #b700ff,
+    0 0 60px #e100ff,
+    0 0 60px #ffee00,
+    0 0 60px #ffee00,
+    0 0 60px #ffee00,
+    0 0 60px #ffee00;
+}
+
+.loginMainContainer {
+    height: 100%;
+    margin-top: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40%; /* Adjust this value as needed */
+}

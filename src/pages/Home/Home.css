@@ -1,0 +1,12 @@
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.back {
+    background-color: aqua;
+}
+
+.textRight {
+    text-align: right;
+}

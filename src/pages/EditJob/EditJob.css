@@ -1,0 +1,107 @@
+.thumbImage {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three images per row */
+    gap: 10px; /* Space between images */
+    justify-items: center; /* Center images horizontally */
+    align-items: center; /* Center images vertically */
+}
+  
+.paint-color-item {
+  margin-bottom: 16px;
+}
+
+.paint-color-detail {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.paint-color-label {
+  font-weight: bold;
+  min-width: 100px; /* Ensures label takes at least this much space */
+  max-width: 100px; /* Limits the space taken by the label */
+}
+
+.marginLeft {
+    margin-left: 10px;
+}
+
+.noteTitle {
+  margin: 0px;
+  padding: 0px;
+  font-weight: bold;
+  padding-right: 10px;
+  white-space: nowrap;
+  display: inline-block; 
+}
+
+.marginBottom {
+  margin-bottom: 20px;
+}
+
+.toolbar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0px; /* Adjust the gap value as needed */
+  width: 100%;
+}
+
+.toolbar-grid .ion-button {
+  width: 100%;
+  justify-content: center; /* Centers the button text */
+}
+
+.buttonGreen {
+  --background: green;
+  --color: white;
+}
+
+.buttonRed {
+  --background: red;
+  --color: white;
+}
+
+.deleteItem {
+  background-color: aqua;
+}
+
+.centerModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 4vh;
+}
+
+.modalButtonHolder {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yesButton {
+  width: 40%;
+  margin-right: 10%;
+  --background-focused: red;
+  --background-hover: red;
+  --background-activated: red;
+}
+
+.noButton {
+  width: 40%;  
+  --background-focused: green;
+  --background-hover: green;
+  --background-activated: green;
+}
+
+.titleModal {
+  margin-bottom: 10vh;
+}
