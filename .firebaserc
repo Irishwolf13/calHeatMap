@@ -1,9 +1,5 @@
 {
   "projects": {
-    "calHeatMap": "calapp2-9420e",
     "default": "calapp2-9420e"
-  },
-  "targets": {},
-  "etags": {},
-  "dataconnectEmulatorConfig": {}
+  }
 }
