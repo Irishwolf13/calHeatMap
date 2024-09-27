@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
-import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonBackButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import MainMenu from '../../components/MainMenu/MainMenu';
+import CalendarMenu from '../../components/CalendarMenu/CalendarMenu';
 import CalendarCell from '../../components/CalendarCell/CalendarCell';
 import './InfiniteScrollCalendar.css';
 
@@ -31,7 +33,6 @@ const InfiniteScrollCalendar: React.FC = () => {
 
   useLayoutEffect(() => {
     if (dates.length) {
-      updateCurrentMonthYear();
       if (isLoading === true) {
         scrollHalfwayDown();
       }
@@ -55,7 +56,6 @@ const InfiniteScrollCalendar: React.FC = () => {
 
       currentDate.setDate(currentDate.getDate() + 1);
     }
-    
     return datesList;
   };
 
@@ -65,36 +65,10 @@ const InfiniteScrollCalendar: React.FC = () => {
     const { scrollTop, clientHeight, scrollHeight } = calendarRef.current;
     const threshold = 100; // Preload when within 100px of the top or bottom
 
-    updateCurrentMonthYear();
-
     if (scrollTop < threshold) {
       preloadPreviousDates();
     } else if (scrollTop + clientHeight > scrollHeight - threshold) {
       preloadNextDates();
-    }
-  };
-
-  const updateCurrentMonthYear = () => {
-    if (!calendarRef.current) return;
-    const offset = 30; // The offset value in pixels
-
-    const calendarRect = calendarRef.current.getBoundingClientRect();
-    if (!calendarRect) return; // Ensure calendarRect is valid
-
-    const firstVisibleDate = dates.find(dateObj => {
-      const element = document.getElementById(dateObj.key);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        return rect.top >= calendarRect.top + offset;
-      }
-      return false;
-    });
-
-    if (firstVisibleDate) {
-      const date = firstVisibleDate.date;
-      const month = date.toLocaleString('default', { month: 'long' });
-      const year = date.getFullYear();
-      // setCurrentMonthYear(`${month} ${year}`);
     }
   };
 
@@ -134,7 +108,7 @@ const InfiniteScrollCalendar: React.FC = () => {
     if (calendarRef.current) {
       const scrollHeight = calendarRef.current.scrollHeight;
       const middlePosition = scrollHeight / 2;
-      
+
       calendarRef.current.scrollTo({
         top: middlePosition,
         behavior: 'smooth'
@@ -147,23 +121,23 @@ const InfiniteScrollCalendar: React.FC = () => {
       myDate.getDate() === firstSelectedDate.getDate() &&
       myDate.getMonth() === firstSelectedDate.getMonth() &&
       myDate.getFullYear() === firstSelectedDate.getFullYear()) {
-      
+
       // Deselect both first and second selected dates
       setFirstSelectedDate(null);
       setSecondSelectedDate(null);
-      
+
     } else if (secondSelectedDate && 
       myDate.getDate() === secondSelectedDate.getDate() &&
       myDate.getMonth() === secondSelectedDate.getMonth() &&
       myDate.getFullYear() === secondSelectedDate.getFullYear()) {
-  
+
       // Deselect the second selected date
       setSecondSelectedDate(null);
-  
+
     } else if (!firstSelectedDate) {
       // Select as the first date
       setFirstSelectedDate(myDate);
-  
+
     } else if (firstSelectedDate && !secondSelectedDate) {
       if (myDate < firstSelectedDate) {
         // Swap dates if the new date is earlier than the first selected date
@@ -173,7 +147,7 @@ const InfiniteScrollCalendar: React.FC = () => {
         // Select as the second date
         setSecondSelectedDate(myDate);
       }
-  
+
     } else if (firstSelectedDate && secondSelectedDate) {
       // If both dates are already selected, update the second date with the new selection
       if (myDate < firstSelectedDate) {
@@ -184,7 +158,7 @@ const InfiniteScrollCalendar: React.FC = () => {
         setSecondSelectedDate(myDate);
       }
     }
-  
+
     console.log(`Clicked on date: ${myDate}`);
   };
 
@@ -200,42 +174,51 @@ const InfiniteScrollCalendar: React.FC = () => {
   );
 
   return (
-    <IonPage>
-    <IonHeader>
-      <IonToolbar>
-        <IonButtons>
-          <IonBackButton></IonBackButton>
-        </IonButtons>
-      </IonToolbar>
-    </IonHeader>
-    <IonContent fullscreen>
-      <IonHeader collapse="condense">
-        <IonToolbar>
-          <IonButtons>
-            <IonBackButton></IonBackButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
-        <div className="calendar-page">
-        {isLoading && (
-          <div className={`loading-overlay ${fadeOut ? 'fade-out' : ''}`}>
-            <div className="loading-spinner"></div>
-          </div>
-        )}
-        <div className="week-header">
-          {daysOfWeek.map((day, index) => (
-            <div key={index} className="week-day">
-              {day}
+    <>
+      <MainMenu />
+      <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonMenuButton></IonMenuButton>
+              <IonBackButton></IonBackButton>
+            </IonButtons>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <IonHeader collapse="condense">
+            <IonToolbar>
+            </IonToolbar>
+          </IonHeader>
+          {isLoading && (
+            <div className={`loading-overlay ${fadeOut ? 'fade-out' : ''}`}>
+              <div className="loading-spinner"></div>
             </div>
-          ))}
+          )}
+          <div className="calendar-page">
+            <div className="operation-section">
+            <CalendarMenu 
+              firstSelectedDate={firstSelectedDate}
+              secondSelectedDate={secondSelectedDate}
+            />
+            </div>
+            <div className="calendar-section">
+              <div className="week-header">
+                {daysOfWeek.map((day, index) => (
+                  <div key={index} className="week-day">
+                  {day}
+                </div>
+              ))}
+            </div>
+            <div ref={calendarRef} className="calendar-grid" onScroll={handleScroll}>
+              {dates.map(renderCalendarCell)}
+            </div>
+          </div>
         </div>
-        <div ref={calendarRef} className="calendar-grid" onScroll={handleScroll}>
-          {dates.map(renderCalendarCell)}
-        </div>
-      </div>
-    </IonContent>
-  </IonPage>
-  );
+      </IonContent>
+    </IonPage>
+  </>
+);
 };
 
 export default InfiniteScrollCalendar;
